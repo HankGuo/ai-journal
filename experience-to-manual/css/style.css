@@ -668,7 +668,18 @@ code {
   
   .prompt-card {
     padding: 16px;
+    padding-top: 40px;
     font-size: 0.8rem;
+  }
+
+  .prompt-label {
+    top: 10px;
+    left: 16px;
+  }
+
+  .prompt-card .copy-btn {
+    top: 8px;
+    right: 8px;
   }
   
   .nav-buttons {
