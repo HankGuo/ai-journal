@@ -645,8 +645,30 @@ code {
   height: auto;
 }
 
+/* --- Swipe Hint (mobile only) --- */
+.swipe-hint-mobile {
+  display: none;
+  margin-top: 32px;
+  padding: 20px 0;
+}
+
+.swipe-hint-mobile .swipe-hand {
+  animation: swipeLeftRight 2.5s ease-in-out infinite;
+  transform-origin: center;
+}
+
+@keyframes swipeLeftRight {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-20px); }
+  50% { transform: translateX(0); }
+  75% { transform: translateX(20px); }
+}
+
 /* --- Responsive --- */
 @media (max-width: 768px) {
+  .swipe-hint-mobile {
+    display: block;
+  }
   :root {
     --page-max-width: 100%;
   }

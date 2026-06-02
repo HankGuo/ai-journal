@@ -102,9 +102,27 @@
       想象你是个厨子。你做了十年菜,肚子里全是经验。但经验存在脑子里,别人看不到也用不了。这套方法就是帮你把那些"肚子里的菜谱"整理成一本像样的、别人翻开就能照着做的食谱。
     </div>
     <p class="text-muted">前提:你已经在用某种 AI agent 工具(WorkBuddy、ColaOS、Codex、Trae等皆可),并且网络环境顺畅。</p>
-    <div class="content-card no-corner" style="margin-top:24px;background:#f8f9fa;border:2px dashed #ccc;text-align:center;">
-      <p style="font-size:0.9rem;color:#666;margin:0;">💡 <strong>操作提示</strong></p>
-      <p style="font-size:0.85rem;color:#888;margin:8px 0 0;">手机：左右滑动翻页 &nbsp;|&nbsp; 电脑：键盘 ← → 或点击底部箭头 &nbsp;|&nbsp; 点左上角 ☰ 打开目录</p>
+    <div class="swipe-hint-mobile">
+      <svg viewBox="0 0 280 120" xmlns="http://www.w3.org/2000/svg" style="width:220px;height:auto;display:block;margin:0 auto 12px;">
+        <!-- Hand icon -->
+        <g class="swipe-hand">
+          <path d="M140,85 C140,85 135,70 135,60 C135,55 138,52 141,52 C144,52 146,54 146,57 L146,45 C146,42 148,39 151,39 C154,39 156,42 156,45 L156,42 C156,39 158,36 161,36 C164,36 166,39 166,42 L166,45 C166,42 168,39 171,39 C174,39 176,42 176,45 L176,70 C176,82 165,92 155,92 L148,92 C140,92 135,88 135,85 Z" fill="#333" opacity="0.8"/>
+          <!-- Finger -->
+          <rect x="128" y="55" width="12" height="30" rx="6" fill="#333" opacity="0.8"/>
+        </g>
+        <!-- Arrow left -->
+        <path d="M50,65 L75,65" stroke="#999" stroke-width="2" stroke-dasharray="4,3" marker-end="url(#arrowL)"/>
+        <text x="50" y="90" font-family="Noto Serif SC" font-size="11" fill="#999" text-anchor="middle">上一页</text>
+        <!-- Arrow right -->
+        <path d="M205,65 L230,65" stroke="#999" stroke-width="2" stroke-dasharray="4,3" marker-end="url(#arrowR)"/>
+        <text x="230" y="90" font-family="Noto Serif SC" font-size="11" fill="#999" text-anchor="end">下一页</text>
+        <!-- Arrow markers -->
+        <defs>
+          <marker id="arrowL" markerWidth="6" markerHeight="6" refX="0" refY="3" orient="auto"><path d="M6,0 L0,3 L6,6" fill="none" stroke="#999" stroke-width="1.5"/></marker>
+          <marker id="arrowR" markerWidth="6" markerHeight="6" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6" fill="none" stroke="#999" stroke-width="1.5"/></marker>
+        </defs>
+      </svg>
+      <p style="font-size:0.8rem;color:#999;text-align:center;margin:0;">左右滑动翻页</p>
     </div>
   </div>
 </section>
