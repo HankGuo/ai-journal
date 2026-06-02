@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Journal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --red: #E53935;
+      --blue: #1565C0;
+      --yellow: #FDD835;
+      --black: #1A1A1A;
+      --white: #FAFAFA;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Noto Serif SC', serif;
+      background: var(--white);
+      color: var(--black);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 60px 24px;
+    }
+    .header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+    .header h1 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 3rem;
+      font-weight: 700;
+      letter-spacing: -1px;
+      margin-bottom: 12px;
+    }
+    .header p {
+      font-size: 1.1rem;
+      color: #555;
+      max-width: 500px;
+      line-height: 1.8;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 24px;
+      width: 100%;
+      max-width: 900px;
+    }
+    .card {
+      border: 3px solid var(--black);
+      padding: 28px;
+      position: relative;
+      text-decoration: none;
+      color: inherit;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 6px 6px 0 var(--black);
+    }
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 8px; height: 100%;
+    }
+    .card.red::before { background: var(--red); }
+    .card.blue::before { background: var(--blue); }
+    .card.yellow::before { background: var(--yellow); }
+    .card h2 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.3rem;
+      margin-bottom: 8px;
+      padding-left: 16px;
+    }
+    .card p {
+      font-size: 0.9rem;
+      color: #666;
+      line-height: 1.6;
+      padding-left: 16px;
+    }
+    .card .tag {
+      display: inline-block;
+      font-size: 0.75rem;
+      padding: 2px 8px;
+      background: var(--black);
+      color: var(--white);
+      font-family: 'Oswald', sans-serif;
+      margin-left: 16px;
+      margin-top: 12px;
+    }
+    @media (max-width: 480px) {
+      .header h1 { font-size: 2rem; }
+      .grid { grid-template-columns: 1fr; }
+      body { padding: 40px 16px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>AI JOURNAL</h1>
+    <p>用 AI 做事的记录与教程。不贩卖焦虑，只分享方法。</p>
+  </div>
+  <div class="grid">
+    <a href="experience-to-manual/" class="card red">
+      <h2>把你的经验变成在线手册</h2>
+      <p>一个下午，用 AI 把脑子里的东西变成一份可分享的在线文档。Markdown → HTML → GitHub Pages。</p>
+      <span class="tag">教程</span>
+    </a>
+    <!-- 后续教程在这里添加更多 card -->
+  </div>
+</body>
+</html>
