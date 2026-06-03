@@ -51,11 +51,36 @@
     return 0;
   }
 
+  // --- Resume Toast ---
+  function showResumeToast(pageNum) {
+    const toast = document.createElement('div');
+    toast.className = 'resume-toast';
+    toast.innerHTML = `<span>╭─ 上次读到第 ${pageNum} 页，已帮你续上 ─╮</span><button class="resume-restart">从头开始</button>`;
+    document.body.appendChild(toast);
+    
+    // Animate in
+    requestAnimationFrame(() => toast.classList.add('visible'));
+    
+    // "从头开始" button
+    toast.querySelector('.resume-restart').addEventListener('click', () => {
+      toast.classList.remove('visible');
+      setTimeout(() => toast.remove(), 400);
+      goToPage(0);
+    });
+    
+    // Auto dismiss after 4s
+    setTimeout(() => {
+      toast.classList.remove('visible');
+      setTimeout(() => toast.remove(), 400);
+    }, 4000);
+  }
+
   // --- Init ---
   function init() {
     const savedPage = loadProgress();
     if (savedPage > 0) {
       goToPage(savedPage, false);
+      setTimeout(() => showResumeToast(savedPage + 1), 500);
     } else {
       goToPage(0, false);
     }

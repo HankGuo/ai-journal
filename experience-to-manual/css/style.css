@@ -677,6 +677,61 @@ code {
   height: auto;
 }
 
+/* --- Resume Toast --- */
+.resume-toast {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-80px);
+  background: var(--mondrian-black);
+  color: #fff;
+  padding: 14px 24px;
+  border-left: 5px solid var(--mondrian-yellow);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  opacity: 0;
+  transition: transform 0.4s ease, opacity 0.4s ease;
+  white-space: nowrap;
+}
+
+.resume-toast.visible {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+
+.resume-toast span {
+  flex: 1;
+}
+
+.resume-restart {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.5);
+  color: #fff;
+  padding: 4px 12px;
+  font-size: 0.8rem;
+  font-family: var(--font-mono);
+  cursor: pointer;
+  border-radius: 3px;
+  transition: background 0.2s;
+}
+
+.resume-restart:hover {
+  background: rgba(255,255,255,0.15);
+}
+
+@media (max-width: 768px) {
+  .resume-toast {
+    font-size: 0.8rem;
+    padding: 12px 16px;
+    width: calc(100% - 32px);
+    white-space: normal;
+  }
+}
+
 /* --- Swipe Hint (mobile only) --- */
 .swipe-hint-mobile {
   display: none;
