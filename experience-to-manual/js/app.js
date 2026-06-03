@@ -28,9 +28,37 @@
 
   totalPages = pages.length;
 
+  // --- Reading Progress (localStorage) ---
+  const STORAGE_KEY = 'ai-journal-reading-progress';
+  
+  function saveProgress(pageIndex) {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({
+        page: pageIndex,
+        total: totalPages,
+        timestamp: Date.now()
+      }));
+    } catch(e) {}
+  }
+  
+  function loadProgress() {
+    try {
+      const data = JSON.parse(localStorage.getItem(STORAGE_KEY));
+      if (data && data.page > 0 && data.page < totalPages) {
+        return data.page;
+      }
+    } catch(e) {}
+    return 0;
+  }
+
   // --- Init ---
   function init() {
-    goToPage(0, false);
+    const savedPage = loadProgress();
+    if (savedPage > 0) {
+      goToPage(savedPage, false);
+    } else {
+      goToPage(0, false);
+    }
     bindEvents();
     updateNavState();
     
@@ -99,6 +127,7 @@
     updateNavState();
     updateProgress();
     updateTOC();
+    saveProgress(currentPage);
   }
 
   function nextPage() {

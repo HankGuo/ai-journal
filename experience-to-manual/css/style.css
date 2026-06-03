@@ -30,13 +30,21 @@
   --font-display: 'Oswald', sans-serif;
   --font-body: 'Noto Serif SC', serif;
   --font-mono: 'JetBrains Mono', monospace;
-  --page-max-width: 780px;
+  --page-max-width: 860px;
   --transition-speed: 0.4s;
 }
 
 html {
   font-size: 16px;
   scroll-behavior: smooth;
+}
+
+@media (min-width: 1200px) {
+  html { font-size: 17px; }
+}
+
+@media (min-width: 1600px) {
+  html { font-size: 18px; }
 }
 
 body {
@@ -342,6 +350,30 @@ code {
 .page-inner {
   max-width: var(--page-max-width);
   width: 100%;
+}
+
+/* --- PC Mondrian side decoration --- */
+@media (min-width: 1024px) {
+  .page::before {
+    content: '';
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 6px;
+    height: 100vh;
+    background: var(--mondrian-black);
+  }
+  .page::after {
+    content: '';
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 6px;
+    height: 100vh;
+    background: var(--mondrian-black);
+  }
+  .page:nth-child(odd)::before { background: var(--mondrian-red); width: 8px; }
+  .page:nth-child(even)::after { background: var(--mondrian-blue); width: 8px; }
 }
 
 /* --- Mondrian Decorative Elements --- */
