@@ -3,115 +3,949 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI Journal</title>
+  <title>把你的经验变成图文并茂的在线手册</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --red: #E53935;
-      --blue: #1565C0;
-      --yellow: #FDD835;
-      --black: #1A1A1A;
-      --white: #FAFAFA;
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: 'Noto Serif SC', serif;
-      background: var(--white);
-      color: var(--black);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 60px 24px;
-    }
-    .header {
-      text-align: center;
-      margin-bottom: 60px;
-    }
-    .header h1 {
-      font-family: 'Oswald', sans-serif;
-      font-size: 3rem;
-      font-weight: 700;
-      letter-spacing: -1px;
-      margin-bottom: 12px;
-    }
-    .header p {
-      font-size: 1.1rem;
-      color: #555;
-      max-width: 500px;
-      line-height: 1.8;
-    }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 24px;
-      width: 100%;
-      max-width: 900px;
-    }
-    .card {
-      border: 3px solid var(--black);
-      padding: 28px;
-      position: relative;
-      text-decoration: none;
-      color: inherit;
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-    .card:hover {
-      transform: translateY(-4px);
-      box-shadow: 6px 6px 0 var(--black);
-    }
-    .card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0;
-      width: 8px; height: 100%;
-    }
-    .card.red::before { background: var(--red); }
-    .card.blue::before { background: var(--blue); }
-    .card.yellow::before { background: var(--yellow); }
-    .card h2 {
-      font-family: 'Oswald', sans-serif;
-      font-size: 1.3rem;
-      margin-bottom: 8px;
-      padding-left: 16px;
-    }
-    .card p {
-      font-size: 0.9rem;
-      color: #666;
-      line-height: 1.6;
-      padding-left: 16px;
-    }
-    .card .tag {
-      display: inline-block;
-      font-size: 0.75rem;
-      padding: 2px 8px;
-      background: var(--black);
-      color: var(--white);
-      font-family: 'Oswald', sans-serif;
-      margin-left: 16px;
-      margin-top: 12px;
-    }
-    @media (max-width: 480px) {
-      .header h1 { font-size: 2rem; }
-      .grid { grid-template-columns: 1fr; }
-      body { padding: 40px 16px; }
-    }
-  </style>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Noto+Serif+SC:wght@400;600;700&family=Oswald:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <div class="header">
-    <h1>AI JOURNAL</h1>
-    <p>用 AI 做事的记录与教程。不贩卖焦虑，只分享方法。</p>
+
+<!-- Progress Bar -->
+<div class="progress-bar" style="width: 0%"></div>
+
+<!-- Page Counter -->
+<div class="page-counter">1 / 29</div>
+
+<!-- Keyboard Hint -->
+<div class="keyboard-hint"><kbd>←</kbd> <kbd>→</kbd> 翻页</div>
+
+<!-- Touch Hint -->
+
+
+<!-- TOC Toggle -->
+<button class="toc-toggle" aria-label="目录">
+  <span></span><span></span><span></span>
+</button>
+
+<!-- TOC Overlay -->
+<div class="toc-overlay"></div>
+
+<!-- TOC Panel -->
+<nav class="toc-panel">
+  <h3>目录导航</h3>
+  <ul class="toc-list">
+    <li><a href="#" data-page="0">封面</a></li>
+    <li><a href="#" data-page="1">这本教程在做什么 <span class="toc-tag cognitive">认知</span></a></li>
+    <li><a href="#" data-page="2">厨子的菜谱 <span class="toc-tag cognitive">认知</span></a></li>
+    <li><a href="#" data-page="3">四把钥匙 <span class="toc-tag cognitive">认知</span></a></li>
+    <li><a href="#" data-page="4">GitHub 与 Skill <span class="toc-tag cognitive">认知</span></a></li>
+    <li><a href="#" data-page="5">为什么是 Markdown <span class="toc-tag cognitive">认知</span></a></li>
+    <li><a href="#" data-page="6">Markdown:审视的工具 <span class="toc-tag cognitive">认知</span></a></li>
+    <li><a href="#" data-page="7">Markdown 源码 vs 渲染 <span class="toc-tag cognitive">认知</span></a></li>
+    <li><a href="#" data-page="8">动手:第一份 Markdown <span class="toc-tag practice">操作</span></a></li>
+    <li><a href="#" data-page="9">Markdown 进阶结构 <span class="toc-tag practice">操作</span></a></li>
+    <li><a href="#" data-page="10">递进:纯文字不够了 <span class="toc-tag cognitive">认知</span></a></li>
+    <li><a href="#" data-page="11">HTML:给内容穿衣服 <span class="toc-tag cognitive">认知</span></a></li>
+    <li><a href="#" data-page="12">你不需要学 HTML <span class="toc-tag cognitive">认知</span></a></li>
+    <li><a href="#" data-page="13">动手:第一个 HTML 页面 <span class="toc-tag practice">操作</span></a></li>
+    <li><a href="#" data-page="14">SVG:你的免费画笔 <span class="toc-tag cognitive">认知</span></a></li>
+    <li><a href="#" data-page="15">动手:画一个 SVG 图标 <span class="toc-tag practice">操作</span></a></li>
+    <li><a href="#" data-page="16">GitHub:为什么需要它 <span class="toc-tag cognitive">认知</span></a></li>
+    <li><a href="#" data-page="17">GitHub:注册与建仓 <span class="toc-tag practice">操作</span></a></li>
+    <li><a href="#" data-page="18">GitHub:上传与发布 <span class="toc-tag practice">操作</span></a></li>
+    <li><a href="#" data-page="19">GitHub:弹药库 <span class="toc-tag cognitive">认知</span></a></li>
+    <li><a href="#" data-page="20">GitHub:版本管理 <span class="toc-tag cognitive">认知</span></a></li>
+    <li><a href="#" data-page="21">GitHub:绿点日历 <span class="toc-tag cognitive">认知</span></a></li>
+    <li><a href="#" data-page="22">Skill:请专家帮你改稿 <span class="toc-tag cognitive">认知</span></a></li>
+    <li><a href="#" data-page="23">动手:安装第一个 Skill <span class="toc-tag practice">操作</span></a></li>
+    <li><a href="#" data-page="24">串联:完整工作流 <span class="toc-tag cognitive">认知</span></a></li>
+    <li><a href="#" data-page="25">先发布,再迭代 <span class="toc-tag cognitive">认知</span></a></li>
+    <li><a href="#" data-page="26">实战:从零到发布 <span class="toc-tag practice">操作</span></a></li>
+    <li><a href="#" data-page="27">下一步去哪 <span class="toc-tag cognitive">认知</span></a></li>
+    <li><a href="#" data-page="28">尾声:闭环 <span class="toc-tag cognitive">认知</span></a></li>
+  </ul>
+</nav>
+
+<!-- Navigation Buttons -->
+<div class="nav-buttons">
+  <button class="nav-btn prev" aria-label="上一页">◀</button>
+  <button class="nav-btn next" aria-label="下一页">▶</button>
+</div>
+
+<!-- ============================== PAGES ============================== -->
+<div class="pages-container">
+
+<!-- ===== PAGE 0: 封面 ===== -->
+<section class="page cover-page active" data-page="0">
+  <div class="page-inner">
+    <div class="cover-grid">
+      <div class="red"></div><div></div><div class="blue"></div><div></div>
+      <div></div><div class="yellow"></div><div></div><div class="red"></div>
+      <div class="blue"></div><div></div><div></div><div class="yellow"></div>
+    </div>
+    <h1 class="cover-title">把你的经验变成<br>图文并茂的在线手册</h1>
+    <p class="cover-subtitle">掌握 4 个工具：Markdown + HTML + SVG + GitHub<br>一个下午搞定，AI 帮你干活</p>
+
+    <div class="swipe-hint-mobile">
+      <svg viewBox="0 0 280 120" xmlns="http://www.w3.org/2000/svg" style="width:220px;height:auto;display:block;margin:0 auto 12px;">
+        <!-- Hand icon -->
+        <g class="swipe-hand">
+          <path d="M140,85 C140,85 135,70 135,60 C135,55 138,52 141,52 C144,52 146,54 146,57 L146,45 C146,42 148,39 151,39 C154,39 156,42 156,45 L156,42 C156,39 158,36 161,36 C164,36 166,39 166,42 L166,45 C166,42 168,39 171,39 C174,39 176,42 176,45 L176,70 C176,82 165,92 155,92 L148,92 C140,92 135,88 135,85 Z" fill="#333" opacity="0.8"/>
+          <!-- Finger -->
+          <rect x="128" y="55" width="12" height="30" rx="6" fill="#333" opacity="0.8"/>
+        </g>
+        <!-- Arrow left -->
+        <path d="M50,65 L75,65" stroke="#999" stroke-width="2" stroke-dasharray="4,3" marker-end="url(#arrowL)"/>
+        <text x="50" y="90" font-family="Noto Serif SC" font-size="11" fill="#999" text-anchor="middle">上一页</text>
+        <!-- Arrow right -->
+        <path d="M205,65 L230,65" stroke="#999" stroke-width="2" stroke-dasharray="4,3" marker-end="url(#arrowR)"/>
+        <text x="230" y="90" font-family="Noto Serif SC" font-size="11" fill="#999" text-anchor="end">下一页</text>
+        <!-- Arrow markers -->
+        <defs>
+          <marker id="arrowL" markerWidth="6" markerHeight="6" refX="0" refY="3" orient="auto"><path d="M6,0 L0,3 L6,6" fill="none" stroke="#999" stroke-width="1.5"/></marker>
+          <marker id="arrowR" markerWidth="6" markerHeight="6" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6" fill="none" stroke="#999" stroke-width="1.5"/></marker>
+        </defs>
+      </svg>
+      <p style="font-size:0.8rem;color:#999;text-align:center;margin:0;">左右滑动翻页</p>
+    </div>
   </div>
-  <div class="grid">
-    <a href="experience-to-manual/" class="card red">
-      <h2>把你的经验变成在线手册</h2>
-      <p>一个下午，用 AI 把脑子里的东西变成一份可分享的在线文档。Markdown → HTML → GitHub Pages。</p>
-      <span class="tag">教程</span>
-    </a>
-    <!-- 后续教程在这里添加更多 card -->
+</section>
+
+<!-- ===== PAGE 1: 这本教程在做什么 (1a) ===== -->
+<section class="page" data-page="1">
+  <div class="page-inner">
+    <div class="section-header">
+      <span class="mondrian-accent"></span>
+      <h1>这本教程在做什么</h1>
+    </div>
+    <p>你正在看的这个页面--翻页式、有配图、手机上也能看--就是用这套方法做出来的。</p>
+    <p>没有设计师参与,没有手写一行代码,没有花钱买服务器。</p>
+    <div class="content-card">
+      <p><strong>它本身就是效果证明。</strong></p>
+      <p>接下来我要分享的,就是做出它的全套方法。如果你有一些经验想整理成手册、教程、指南--不管是给团队用的SOP还是给客户看的入门说明--这套组合拳可能对你有帮助。</p>
+    </div>
   </div>
+</section>
+
+<!-- ===== PAGE 2: 厨子的菜谱 (1b) ===== -->
+<section class="page" data-page="2">
+  <div class="page-inner">
+    <div class="section-header">
+      <span class="mondrian-accent"></span>
+      <h1>厨子的菜谱</h1>
+    </div>
+    <div class="metaphor-box">
+      想象你是个厨子。你做了十年菜,肚子里全是经验。但经验存在脑子里,别人看不到也用不了。这套方法就是教你掌握 4 个基础工具，帮你把"肚子里的菜谱"变成一本图文并茂、人人都能访问的在线手册。
+    </div>
+    <p class="text-muted">前提:你已经在用某种 AI agent 工具(WorkBuddy、ColaOS、Codex、Trae等皆可),并且网络环境顺畅。</p>
+    <div class="diagram-container">
+      <svg viewBox="0 0 480 140" xmlns="http://www.w3.org/2000/svg">
+        <!-- Box 1: 脑子里的经验 -->
+        <rect x="20" y="35" width="120" height="70" fill="#E53935" stroke="#1A1A1A" stroke-width="3"/>
+        <text x="80" y="65" text-anchor="middle" font-family="Noto Serif SC" font-size="13" fill="#fff">脑子里的</text>
+        <text x="80" y="85" text-anchor="middle" font-family="Noto Serif SC" font-size="13" fill="#fff">经验</text>
+        <!-- Arrow 1 -->
+        <line x1="140" y1="70" x2="180" y2="70" stroke="#1A1A1A" stroke-width="3" marker-end="url(#arrowM)"/>
+        <!-- Box 2: 整理 -->
+        <rect x="180" y="35" width="120" height="70" fill="#FDD835" stroke="#1A1A1A" stroke-width="3"/>
+        <text x="240" y="65" text-anchor="middle" font-family="Noto Serif SC" font-size="13" fill="#1A1A1A">AI 帮你</text>
+        <text x="240" y="85" text-anchor="middle" font-family="Noto Serif SC" font-size="13" fill="#1A1A1A">整理</text>
+        <!-- Arrow 2 -->
+        <line x1="300" y1="70" x2="340" y2="70" stroke="#1A1A1A" stroke-width="3" marker-end="url(#arrowM)"/>
+        <!-- Box 3: 在线手册 -->
+        <rect x="340" y="35" width="120" height="70" fill="#1565C0" stroke="#1A1A1A" stroke-width="3"/>
+        <text x="400" y="65" text-anchor="middle" font-family="Noto Serif SC" font-size="13" fill="#fff">在线手册</text>
+        <text x="400" y="85" text-anchor="middle" font-family="Oswald" font-size="11" fill="#fff">anyone can read</text>
+        <!-- Arrow marker -->
+        <defs>
+          <marker id="arrowM" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+            <path d="M0,0 L8,4 L0,8 Z" fill="#1A1A1A"/>
+          </marker>
+        </defs>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PAGE 3: 四把钥匙 (2a) ===== -->
+<section class="page" data-page="3">
+  <div class="page-inner">
+    <div class="section-header blue-accent">
+      <span class="mondrian-accent blue"></span>
+      <h1>四把钥匙</h1>
+    </div>
+    <p>整件事情只用四样东西。每一样我都会讲<em>为什么需要它</em>--不只是"怎么用"。</p>
+    <div class="content-card">
+      <h3 style="color:#E53935;">🔑 Markdown</h3>
+      <p>一种极简的文本标记方式。用 # 表示标题、用 - 表示列表。它让你能<strong>审视结构</strong>--不是写内容,而是看骨架。</p>
+    </div>
+    <div class="content-card blue-corner">
+      <h3 style="color:#1565C0;">🔑 HTML + SVG</h3>
+      <p>把纯文字变成有排版、有配图的漂亮页面。你不需要写它--AI 帮你写。你负责<strong>验收效果</strong>。</p>
+    </div>
+    <p>它们是一条自然的递进链--每一环解决前一环留下的问题。</p>
+  </div>
+</section>
+
+<!-- ===== PAGE 4: 四把钥匙(续) (2b) ===== -->
+<section class="page" data-page="4">
+  <div class="page-inner">
+    <div class="section-header blue-accent">
+      <span class="mondrian-accent blue"></span>
+      <h1>GitHub 与 Skill</h1>
+    </div>
+    <div class="content-card">
+      <h3 style="color:#FDD835; text-shadow:0 0 1px #333;">🔑 GitHub</h3>
+      <p>免费的"文件仓库+展示橱窗"。把你的页面发布成一个真实网址,全球任何人都能访问。还自带版本管理。</p>
+    </div>
+    <div class="content-card red-corner">
+      <h3>🔑 Skill</h3>
+      <p>AI 的"专家外挂"。装上之后,AI 就像多了一个专业审稿人帮你把关质量。</p>
+    </div>
+    <div class="diagram-container">
+      <svg viewBox="0 0 480 100" xmlns="http://www.w3.org/2000/svg">
+        <rect x="10" y="15" width="100" height="70" fill="#E53935" stroke="#1A1A1A" stroke-width="3"/>
+        <text x="60" y="45" text-anchor="middle" font-family="Oswald" font-size="14" fill="#fff">Markdown</text>
+        <text x="60" y="65" text-anchor="middle" font-family="Noto Serif SC" font-size="10" fill="#fff">组织内容</text>
+        <rect x="130" y="15" width="100" height="70" fill="#1565C0" stroke="#1A1A1A" stroke-width="3"/>
+        <text x="180" y="45" text-anchor="middle" font-family="Oswald" font-size="14" fill="#fff">HTML</text>
+        <text x="180" y="65" text-anchor="middle" font-family="Noto Serif SC" font-size="10" fill="#fff">呈现内容</text>
+        <rect x="250" y="15" width="100" height="70" fill="#FDD835" stroke="#1A1A1A" stroke-width="3"/>
+        <text x="300" y="45" text-anchor="middle" font-family="Oswald" font-size="14" fill="#1A1A1A">GitHub</text>
+        <text x="300" y="65" text-anchor="middle" font-family="Noto Serif SC" font-size="10" fill="#1A1A1A">发布内容</text>
+        <rect x="370" y="15" width="100" height="70" fill="#1A1A1A" stroke="#1A1A1A" stroke-width="3"/>
+        <text x="420" y="45" text-anchor="middle" font-family="Oswald" font-size="14" fill="#fff">Skill</text>
+        <text x="420" y="65" text-anchor="middle" font-family="Noto Serif SC" font-size="10" fill="#fff">提升质量</text>
+        <line x1="110" y1="50" x2="130" y2="50" stroke="#1A1A1A" stroke-width="2" marker-end="url(#arrowM)"/>
+        <line x1="230" y1="50" x2="250" y2="50" stroke="#1A1A1A" stroke-width="2" marker-end="url(#arrowM)"/>
+        <line x1="350" y1="50" x2="370" y2="50" stroke="#1A1A1A" stroke-width="2" marker-end="url(#arrowM)"/>
+      </svg>
+    </div>
+    <p>别急,我们一个一个来。</p>
+  </div>
+</section>
+
+<!-- ===== PAGE 5: 为什么是 Markdown ===== -->
+<section class="page" data-page="5">
+  <div class="page-inner">
+    <div class="section-header">
+      <span class="mondrian-accent"></span>
+      <h1>为什么是 Markdown</h1>
+    </div>
+    <p>你和 AI 对话的时候,是不是经常这样:</p>
+    <div class="quote-block">
+      "帮我写一个关于XX的教程,要包含入门、进阶、常见问题......"<br>
+      AI 哗啦啦回了2000字。你看了一眼,觉得"挺好的"--但哪里好?结构对不对?漏没漏东西?说不清。
+    </div>
+    <p>问题出在哪?<strong>纯文字是一坨面糊。</strong>你很难一眼看出它的骨架。</p>
+    <div class="metaphor-box">
+      Markdown 就像菜单的草稿纸。当你在纸上写"凉菜""热菜""汤品"的时候,你不是在写菜谱--你是在<em>审视结构</em>。三个大类对不对?顺序合不合理?有没有漏掉甜品?
+    </div>
+    <p>所以 Markdown 的核心价值不只是"给 AI 看的输入格式",更是<strong>你审视 AI 输出的工具</strong>。</p>
+    <p>当 AI 回复你的时候,如果它用 Markdown 格式--有 # 标题、有 - 列表、有层级--你一扫就知道:结构对不对、深度够不够、有没有跑题。</p>
+  </div>
+</section>
+
+<!-- ===== PAGE 6: Markdown 审视的工具 (4a) ===== -->
+<section class="page" data-page="6">
+  <div class="page-inner">
+    <div class="section-header">
+      <span class="mondrian-accent"></span>
+      <h1>Markdown:审视的工具</h1>
+    </div>
+    <p>来看一个对比。同样一段内容,两种写法:</p>
+    <div class="content-card no-corner">
+      <h3>❌ 纯文字版</h3>
+      <p class="text-small">客户入职流程分为三个阶段,首先需要签订合同,签完后进入账号创建阶段,我们会在一个工作日内完成,然后进入培训阶段,通常安排在第一周内,培训内容包括系统操作和常见问题处理......</p>
+    </div>
+    <div class="content-card blue-corner">
+      <h3>✓ Markdown 源码</h3>
+      <p class="text-small" style="font-family: var(--font-mono); white-space: pre-line"># 客户入职流程
+
+## 1. 签约阶段
+- 签订合同
+- 确认付款
+
+## 2. 账号创建(1个工作日)
+- 创建系统账号
+- 发送欢迎邮件
+
+## 3. 培训(第一周内)
+- 系统操作培训
+- 常见问题处理</p>
+    </div>
+    <p>同样的信息,源码让你<em>一眼审视结构</em>。这就是"审视"--<strong>Markdown 让结构显性化。</strong></p>
+  </div>
+</section>
+
+<!-- ===== PAGE 7: Markdown 源码 vs 渲染效果 (4b) ===== -->
+<section class="page" data-page="7">
+  <div class="page-inner">
+    <div class="section-header">
+      <span class="mondrian-accent"></span>
+      <h1>Markdown 源码 vs 渲染效果</h1>
+    </div>
+    <p>上一页是源码视角,现在看渲染后的样子:</p>
+    <div class="content-card" style="background:#f8f9fa;border-left:4px solid #4CAF50;">
+      <h3>✓ 渲染后的效果</h3>
+      <h2 style="font-family:var(--font-heading);font-size:1.2rem;margin:0.3rem 0;">客户入职流程</h2>
+      <h3 style="font-size:0.95rem;margin:0.5rem 0 0.2rem;color:#1565C0;">1. 签约阶段</h3>
+      <ul style="margin:0 0 0.5rem 1.2rem;font-size:0.85rem;"><li>签订合同</li><li>确认付款</li></ul>
+      <h3 style="font-size:0.95rem;margin:0.5rem 0 0.2rem;color:#1565C0;">2. 账号创建(1个工作日)</h3>
+      <ul style="margin:0 0 0.5rem 1.2rem;font-size:0.85rem;"><li>创建系统账号</li><li>发送欢迎邮件</li></ul>
+      <h3 style="font-size:0.95rem;margin:0.5rem 0 0.2rem;color:#1565C0;">3. 培训(第一周内)</h3>
+      <ul style="margin:0 0 0 1.2rem;font-size:0.85rem;"><li>系统操作培训</li><li>常见问题处理</li></ul>
+    </div>
+    <p>源码让你<em>审视结构</em>,渲染后让<em>读者舒服阅读</em>。两种视角,两种价值。</p>
+    <p>接下来动手试试——让 AI 帮你产出 Markdown,你来审视它。</p>
+  </div>
+</section>
+
+<!-- ===== PAGE 8: 动手 第一份 Markdown ===== -->
+<section class="page" data-page="8">
+  <div class="page-inner">
+    <div class="section-header green-accent">
+      <span class="mondrian-accent blue"></span>
+      <h1>动手:第一份 Markdown</h1>
+    </div>
+    <p>打开你的 AI agent,把下面的提示词复制给它:</p>
+    <div class="prompt-card">
+      <span class="prompt-label">PROMPT</span>
+      <button class="copy-btn">复制</button>
+      <code>请帮我用 Markdown 格式,列出"[你的主题]"的基本框架。
+要求:
+- 用 # 和 ## 表示层级
+- 每个章节下用 - 列出3-5个要点
+- 不需要写具体内容,只要框架
+
+先输出框架让我确认结构,确认后再展开写。</code>
+    </div>
+    <p>把 <code>[你的主题]</code> 换成你自己的内容。比如"新人入职指南""客户常见问题""我的摄影后期流程"--任何你想整理的东西。</p>
+    <div class="result-hint">
+      AI 会回复一个带有 # 标题和 - 列表的框架。你应该能一眼看出整体结构--哪里多了、哪里少了。如果结构不对,直接说"把第三部分拆成两个""加一个FAQ章节"。
+    </div>
+    <p class="text-muted">关键心法:<strong>先审结构,再填内容。</strong>不要让AI一次性全写完--你会丧失审视的主动权。</p>
+  </div>
+</section>
+
+<!-- ===== PAGE 9: Markdown 进阶结构 ===== -->
+<section class="page" data-page="9">
+  <div class="page-inner">
+    <div class="section-header green-accent">
+      <span class="mondrian-accent blue"></span>
+      <h1>Markdown 进阶结构</h1>
+    </div>
+    <p>当框架确认后,让 AI 逐章展开。每章可以用这些 Markdown 元素:</p>
+    <div class="content-card no-corner">
+      <ul class="styled-list">
+        <li><code>## 标题</code> - 章节名</li>
+        <li><code>### 小标题</code> - 子章节</li>
+        <li><code>- 列表项</code> - 要点罗列</li>
+        <li><code>**粗体**</code> - 强调关键词</li>
+        <li><code>> 引用</code> - 补充说明或注意事项</li>
+      </ul>
+    </div>
+    <div class="prompt-card">
+      <span class="prompt-label">PROMPT</span>
+      <button class="copy-btn">复制</button>
+      <code>现在请展开第一章的内容。要求:
+- 保持 Markdown 格式
+- 每个要点用1-2句话解释
+- 如果有操作步骤,用有序列表(1. 2. 3.)
+- 有专业术语的地方加一句通俗解释</code>
+    </div>
+    <div class="result-hint">
+      AI 回复会保持层级结构。你可以逐章审视--每次只确认一章,确认完再让它写下一章。这样你始终掌控全局。
+    </div>
+    <p>三章写完,你大概率会有一个感受--翻下一页我来说。</p>
+  </div>
+</section>
+
+<!-- ===== PAGE 10: 递进--纯文字不够了 ===== -->
+<section class="page" data-page="10">
+  <div class="page-inner">
+    <div class="section-header blue-accent">
+      <span class="mondrian-accent blue"></span>
+      <h1>递进:纯文字不够了</h1>
+    </div>
+    <p>三章 Markdown 写完,你把它读一遍。然后你会发现--</p>
+    <div class="content-card red-corner">
+      <p style="font-size: 1.15rem; text-align: center;"><strong>纯文字读起来累。</strong></p>
+      <p>内容没问题。结构也对。但满屏都是字,你自己都不想看第二遍。如果你都不想看,凭什么期待别人看?</p>
+    </div>
+    <p>内容一样,<em>呈现方式决定了别人愿不愿意接收</em>。想想你平时看的公众号文章--同样的内容,有配图、有缩进、有高亮的那篇,你是不是更愿意读下去?</p>
+    <div class="metaphor-box">
+      就像做菜--食材一样,但一份装在保温饭盒里,一份摆了盘还撒了芝麻。味道一样,但后者让人"愿意动筷"。HTML 和 SVG 干的就是这个事:不改内容,改"摆盘"。
+    </div>
+    <p>接下来两层:</p>
+    <ul class="styled-list">
+      <li><strong>HTML</strong> - 让内容有排版、有样式、有颜色,从"笔记"变成"页面"</li>
+      <li><strong>SVG</strong> - 让你拥有定制图形,不用找素材、不担心版权、放大不糊</li>
+    </ul>
+    <p>你不需要学会它们--你只需要知道它们干什么,然后让 AI 帮你写。</p>
+  </div>
+</section>
+
+<!-- ===== PAGE 11: HTML 给内容穿衣服 (8a) ===== -->
+<section class="page" data-page="11">
+  <div class="page-inner">
+    <div class="section-header blue-accent">
+      <span class="mondrian-accent blue"></span>
+      <h1>HTML:给内容穿衣服</h1>
+    </div>
+    <p>HTML 不是编程语言--它是"标记语言"。什么意思?就是你在内容旁边做标记:这里是标题、那里是段落、这块要加粗。</p>
+    <div class="diagram-container">
+      <svg viewBox="0 0 500 180" xmlns="http://www.w3.org/2000/svg">
+        <rect x="20" y="20" width="200" height="140" fill="#F5F5F5" stroke="#1A1A1A" stroke-width="2"/>
+        <text x="120" y="50" text-anchor="middle" font-family="JetBrains Mono" font-size="11" fill="#666"># 我的标题</text>
+        <text x="120" y="75" text-anchor="middle" font-family="JetBrains Mono" font-size="11" fill="#666">一段内容...</text>
+        <text x="120" y="100" text-anchor="middle" font-family="JetBrains Mono" font-size="11" fill="#666">- 列表项</text>
+        <text x="120" y="130" text-anchor="middle" font-family="Oswald" font-size="12" fill="#999">Markdown</text>
+        <path d="M230,90 L270,90" stroke="#1A1A1A" stroke-width="2" marker-end="url(#arrowM)"/>
+        <text x="250" y="80" text-anchor="middle" font-family="Noto Serif SC" font-size="10" fill="#E53935">AI 转换</text>
+        <rect x="280" y="20" width="200" height="140" fill="#E3F2FD" stroke="#1565C0" stroke-width="2"/>
+        <text x="380" y="50" text-anchor="middle" font-family="Oswald" font-size="16" fill="#1A1A1A">我的标题</text>
+        <text x="380" y="78" text-anchor="middle" font-family="Noto Serif SC" font-size="12" fill="#333">一段漂亮的内容</text>
+        <rect x="320" y="95" width="120" height="20" rx="3" fill="#1565C0"/>
+        <text x="380" y="109" text-anchor="middle" font-family="Noto Serif SC" font-size="10" fill="#fff">• 精美列表项</text>
+        <text x="380" y="145" text-anchor="middle" font-family="Oswald" font-size="12" fill="#1565C0">HTML 页面</text>
+      </svg>
+    </div>
+    <p>Markdown 是骨架,HTML 是穿上衣服后的样子。AI 负责"裁缝"工作。</p>
+  </div>
+</section>
+
+<!-- ===== PAGE 12: 你不需要学 HTML (8b) ===== -->
+<section class="page" data-page="12">
+  <div class="page-inner">
+    <div class="section-header blue-accent">
+      <span class="mondrian-accent blue"></span>
+      <h1>你不需要学 HTML</h1>
+    </div>
+    <p>好消息是:<strong>你不需要学 HTML</strong>。AI 会帮你写。你只需要:</p>
+    <ul class="styled-list">
+      <li>把你的 Markdown 内容给 AI</li>
+      <li>告诉它你想要什么风格("简洁的""科技感的""温暖的")</li>
+      <li>它就给你一个完整的 HTML 文件</li>
+    </ul>
+    <p>你做的是"选菜"和"验收",AI 是"厨师"。</p>
+    <div class="diagram-container">
+      <svg viewBox="0 0 400 160" xmlns="http://www.w3.org/2000/svg">
+        <!-- Stick figure -->
+        <circle cx="80" cy="35" r="18" fill="none" stroke="#1A1A1A" stroke-width="3"/>
+        <line x1="80" y1="53" x2="80" y2="100" stroke="#1A1A1A" stroke-width="3"/>
+        <line x1="80" y1="70" x2="55" y2="85" stroke="#1A1A1A" stroke-width="3"/>
+        <line x1="80" y1="70" x2="115" y2="60" stroke="#1A1A1A" stroke-width="3"/>
+        <line x1="80" y1="100" x2="60" y2="130" stroke="#1A1A1A" stroke-width="3"/>
+        <line x1="80" y1="100" x2="100" y2="130" stroke="#1A1A1A" stroke-width="3"/>
+        <!-- Pointing arm to screen -->
+        <!-- Screen -->
+        <rect x="180" y="20" width="180" height="110" rx="5" fill="#F5F5F5" stroke="#1A1A1A" stroke-width="3"/>
+        <rect x="195" y="35" width="150" height="80" fill="#E3F2FD"/>
+        <text x="270" y="65" text-anchor="middle" font-family="Noto Serif SC" font-size="11" fill="#333">你的页面</text>
+        <!-- Checkmark -->
+        <circle cx="270" cy="90" r="16" fill="#4CAF50" stroke="#1A1A1A" stroke-width="2"/>
+        <path d="M260,90 L267,97 L282,82" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        <!-- Label -->
+        <text x="270" y="150" text-anchor="middle" font-family="Noto Serif SC" font-size="11" fill="#666">验收通过 ✓</text>
+        <text x="80" y="148" text-anchor="middle" font-family="Noto Serif SC" font-size="11" fill="#666">你(决策者)</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PAGE 13: 动手:第一个 HTML 页面 ===== -->
+<section class="page" data-page="13">
+  <div class="page-inner">
+    <div class="section-header green-accent">
+      <span class="mondrian-accent blue"></span>
+      <h1>动手:第一个 HTML 页面</h1>
+    </div>
+    <p>把你之前写好的 Markdown 内容(哪怕只是第一章)交给 AI:</p>
+    <div class="prompt-card">
+      <span class="prompt-label">PROMPT</span>
+      <button class="copy-btn">复制</button>
+      <code>请把下面的 Markdown 内容转成一个漂亮的 HTML 页面。
+
+要求:
+- 单文件,所有样式内嵌
+- 风格简洁现代,适合手机阅读
+- 用好看的字体和间距
+- 加适当的颜色(不要太花哨)
+
+内容如下:
+[粘贴你的 Markdown 内容]</code>
+    </div>
+    <div class="result-hint">
+      AI 会输出一个 .html 文件。用浏览器直接打开它--你会看到一个有样式的页面。跟刚才的纯文字 Markdown 对比一下视觉差异。
+    </div>
+    <p>看到效果了?<strong>内容没变一个字,但观感完全不同。</strong>这就是"摆盘"的力量。</p>
+    <p class="text-muted">如果觉得字体不对、颜色不喜欢--直接告诉 AI "标题换成红色""段落间距再大一点"。它会帮你改。</p>
+  </div>
+</section>
+
+<!-- ===== PAGE 14: SVG 你的免费画笔 ===== -->
+<section class="page" data-page="14">
+  <div class="page-inner">
+    <div class="section-header blue-accent">
+      <span class="mondrian-accent yellow"></span>
+      <h1>SVG:你的免费画笔</h1>
+    </div>
+    <p>页面有了,但全是文字的页面还是单调。你需要图。</p>
+    <p>传统做法:去图片网站找素材→担心版权→下载→调整大小→放进去。麻烦。</p>
+    <p><strong>SVG 的做法:让 AI 画。</strong></p>
+    <div class="content-card">
+      <p>SVG 是"用代码描述的图形"。意思是--你告诉 AI "画一个表示流程的示意图",它直接写出来,不需要 Photoshop,不存在版权问题,而且放大缩小都不模糊。</p>
+    </div>
+    <div class="diagram-container">
+      <svg viewBox="0 0 400 120" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="60" cy="60" r="35" fill="#E53935" stroke="#1A1A1A" stroke-width="2"/>
+        <text x="60" y="65" text-anchor="middle" font-family="Oswald" font-size="12" fill="#fff">想法</text>
+        <circle cx="200" cy="60" r="35" fill="#FDD835" stroke="#1A1A1A" stroke-width="2"/>
+        <text x="200" y="65" text-anchor="middle" font-family="Oswald" font-size="12" fill="#1A1A1A">AI 画</text>
+        <circle cx="340" cy="60" r="35" fill="#1565C0" stroke="#1A1A1A" stroke-width="2"/>
+        <text x="340" y="65" text-anchor="middle" font-family="Oswald" font-size="12" fill="#fff">成品</text>
+        <line x1="95" y1="60" x2="165" y2="60" stroke="#1A1A1A" stroke-width="2" marker-end="url(#arrowM)"/>
+        <line x1="235" y1="60" x2="305" y2="60" stroke="#1A1A1A" stroke-width="2" marker-end="url(#arrowM)"/>
+      </svg>
+    </div>
+    <p>你不需要会画画,也不需要学 SVG 语法。你只需要<em>描述你想要什么图</em>,AI 来实现。</p>
+  </div>
+</section>
+
+<!-- ===== PAGE 15: 动手 画一个 SVG 图标 ===== -->
+<section class="page" data-page="15">
+  <div class="page-inner">
+    <div class="section-header green-accent">
+      <span class="mondrian-accent yellow"></span>
+      <h1>动手:画一个 SVG 图标</h1>
+    </div>
+    <div class="prompt-card">
+      <span class="prompt-label">PROMPT</span>
+      <button class="copy-btn">复制</button>
+      <code>请用 SVG 画一个简单的流程图,展示以下步骤:
+1. 写内容(红色方块)
+2. 做页面(蓝色方块)
+3. 发布上线(黄色方块)
+
+要求:
+- 三个方块横排,中间用箭头连接
+- 方块下面写步骤名称
+- 风格简洁,蒙德里安风
+- 输出纯 SVG 代码</code>
+    </div>
+    <div class="result-hint">
+      AI 回复一段 SVG 代码。你可以把它直接贴到 HTML 文件里(放在你想要图片出现的位置),浏览器刷新就能看到图形。
+    </div>
+    <p>试试改描述——"把三个方块改成圆形""加一个第四步"——AI 会即时修改。你会发现：调整一张图比写一段话还快。</p>
+    <div class="content-card">
+      <h3>SVG 的常见用途</h3>
+      <ul class="styled-list">
+        <li>流程图——展示步骤顺序</li>
+        <li>对比图——前后差异、方案对比</li>
+        <li>图标——为你的页面加视觉符号</li>
+        <li>数据可视化——简单的图表、比例图</li>
+      </ul>
+    </div>
+    <p><strong>没有素材可找？让 AI 画。没有版权能用？让 AI 画。</strong>这就是 SVG 的自由。且它永远不会糊——放大多少倍都清晰。</p>
+  </div>
+</section>
+
+<!-- ===== PAGE 16: GitHub 三个动机 ===== -->
+<section class="page" data-page="16">
+  <div class="page-inner">
+    <div class="section-header yellow-accent">
+      <span class="mondrian-accent yellow"></span>
+      <h1>GitHub:为什么需要它</h1>
+    </div>
+    <p>现在你有了 HTML 文件,在自己电脑上打开没问题。但它只存在于你的硬盘里--别人看不到,而且万一文件丢了就没了。</p>
+    <p>GitHub 是什么?简单说:<strong>一个免费的「文件存放+展示」平台</strong>。全球最大的开源社区,所有人都把自己的作品放在这里。</p>
+    <p>它对你有三个实际用处:</p>
+    <div class="content-card">
+      <h3>1 发布:让别人看到</h3>
+      <p>GitHub 免费把你的 HTML 变成一个真实网址。发链接给任何人就能看。不用买服务器,不用懂运维。</p>
+    </div>
+    <div class="content-card blue-corner">
+      <h3>2 参考:公共弹药库</h3>
+      <p>GitHub 上有无数人做好的模板、组件、工具。看到喜欢的页面?复制链接给 AI 说"照这个风格来"--不用重复造轮子。</p>
+    </div>
+    <div class="content-card red-corner">
+      <h3>3 记录:版本管理 + 作品日历</h3>
+      <p>每次修改都被记录。想回到上一版?随时可以。而且还有一个"绿点日历"让你看到自己的产出轨迹。</p>
+    </div>
+    <div class="metaphor-box">
+      类比:你的 HTML 是一家店的装修,GitHub 提供了三样东西--一个店铺地址(别人能来)、一个建材市场(你能拿别人的材料)、一本自动记录的装修日志(每次改动都有据可查)。
+    </div>
+  </div>
+</section>
+
+<!-- ===== PAGE 17: GitHub 注册与建仓 ===== -->
+<section class="page" data-page="17">
+  <div class="page-inner">
+    <div class="section-header green-accent">
+      <span class="mondrian-accent yellow"></span>
+      <h1>GitHub:注册与建仓</h1>
+    </div>
+    <p>去 <code>github.com</code> 注册一个账号。邮箱验证完就行,免费的。</p>
+    <p class="text-muted">确保网络环境顺畅。</p>
+    <p>注册好之后,让 AI 帮你建第一个"仓库"(Repository):</p>
+    <div class="prompt-card">
+      <span class="prompt-label">PROMPT</span>
+      <button class="copy-btn">复制</button>
+      <code>我已经注册好了 GitHub 账号,用户名是 [你的用户名]。
+请一步步指导我创建第一个仓库(Repository),要求:
+- 仓库名叫 my-manual(或你喜欢的名字)
+- 设为 Public(公开)
+- 勾选 "Add a README file"
+请告诉我在哪里点、点什么,每一步都配截图描述。</code>
+    </div>
+    <div class="result-hint">
+      你应该看到一个新建的仓库页面,里面有一个 README.md 文件。仓库地址类似:github.com/你的用户名/my-manual
+    </div>
+    <div class="metaphor-box">
+      "仓库"这个词听着技术,其实就是一个"文件夹"--一个在网上的文件夹。你的手册的所有文件都放这里。
+    </div>
+  </div>
+</section>
+
+<!-- ===== PAGE 18: GitHub 上传与发布 ===== -->
+<section class="page" data-page="18">
+  <div class="page-inner">
+    <div class="section-header green-accent">
+      <span class="mondrian-accent yellow"></span>
+      <h1>GitHub:上传与发布</h1>
+    </div>
+    <p>仓库建好了,现在把你的 HTML 文件放进去,然后开启"展示橱窗"。</p>
+    <div class="prompt-card">
+      <span class="prompt-label">PROMPT</span>
+      <button class="copy-btn">复制</button>
+      <code>我已经创建了仓库 my-manual。现在请指导我:
+1. 把我的 index.html 文件上传到这个仓库
+2. 开启 GitHub Pages,让别人通过网址能访问到我的页面
+
+请一步步说明操作路径(在哪里点击什么按钮)。</code>
+    </div>
+    <ol class="step-list">
+      <li>在仓库页面点 "Add file" → "Upload files"</li>
+      <li>拖入你的 HTML 文件(和 CSS/JS 如果有的话)</li>
+      <li>点 "Commit changes"</li>
+      <li>进入 Settings → Pages → Source 选 "main" 分支 → Save</li>
+      <li>等待1-2分钟,你会获得一个类似 <code>https://你的用户名.github.io/my-manual/</code> 的网址</li>
+    </ol>
+    <div class="result-hint">
+      打开那个网址,你的手册已经在线了。发给任何人都能看。手机也能看。全球都能访问。免费的。
+    </div>
+  </div>
+</section>
+
+<!-- ===== PAGE 19: GitHub 弹药库 ===== -->
+<section class="page" data-page="19">
+  <div class="page-inner">
+    <div class="section-header yellow-accent">
+      <span class="mondrian-accent yellow"></span>
+      <h1>GitHub:弹药库</h1>
+    </div>
+    <p>这是 GitHub 最被低估的用法--不只是放自己的东西,更是<em>拿别人做好的东西</em>。</p>
+    <div class="content-card">
+      <h3>场景1:你想做一个翻页式教程</h3>
+      <p>搜 GitHub,找到一个你喜欢的模板。把链接给 AI:"照这个风格帮我改成我的内容。"</p>
+      <h3 class="mt-2">场景2:你需要一个好看的代码高亮样式</h3>
+      <p>搜 GitHub,找到别人调好的配色方案。直接拿来用。</p>
+      <h3 class="mt-2">场景3:你想加个目录导航</h3>
+      <p>找到别人做好的导航组件,复制代码给 AI 说"把这个加到我的页面里"。</p>
+    </div>
+    <div class="metaphor-box">
+      GitHub 就像一个巨大的免费建材市场。别人已经把砖切好了、瓷砖贴好了。你不用从零烧砖--拿来拼就行。而你让 AI 去"逛市场"和"搬砖回来砌好"。
+    </div>
+    <p><strong>关键操作</strong>:当你看到喜欢的东西,把它的 GitHub 网址复制给 AI,说"参考这个来做"。AI 会去看那个仓库的代码,然后帮你实现类似的效果。</p>
+  </div>
+</section>
+
+<!-- ===== PAGE 20: GitHub 版本管理 (16a) ===== -->
+<section class="page" data-page="20">
+  <div class="page-inner">
+    <div class="section-header yellow-accent">
+      <span class="mondrian-accent yellow"></span>
+      <h1>GitHub:版本管理</h1>
+    </div>
+    <div class="content-card">
+      <h3>版本管理:后悔药</h3>
+      <p>GitHub 的核心能力之一是<strong>版本管理</strong>--每次你推送更新,它都会保存一个"快照"。这意味着:</p>
+      <ul class="styled-list">
+        <li>今天改坏了?随时回滚到昨天的版本</li>
+        <li>想看上周改了什么?版本对比一目了然</li>
+        <li>不确定新改动好不好?可以随时切换新旧版本对比</li>
+      </ul>
+      <p class="text-muted">就像写文档时的"撤销"功能,只不过它能撤销到任何时间点。</p>
+    </div>
+    <p>对一般用户来说,这是最大的安全感来源--<strong>永远不怕改坏</strong>,因为随时可以回去。</p>
+  </div>
+</section>
+
+<!-- ===== PAGE 21: GitHub 绿点日历 (16b) ===== -->
+<section class="page" data-page="21">
+  <div class="page-inner">
+    <div class="section-header yellow-accent">
+      <span class="mondrian-accent yellow"></span>
+      <h1>GitHub:绿点日历</h1>
+    </div>
+    <div class="content-card blue-corner">
+      <h3>绿点日历:你的作品时间线</h3>
+      <p>每次推送更新(哪怕改了一个错别字),那天就会亮一个绿点。三个月后回头看,你能清楚地看到:什么时候开始的?中间在做什么?进度如何?</p>
+    </div>
+    <div class="diagram-container">
+      <svg viewBox="0 0 320 70" xmlns="http://www.w3.org/2000/svg">
+        <g transform="translate(10, 10)">
+          <rect x="0" y="0" width="10" height="10" rx="2" fill="#ebedf0"/><rect x="13" y="0" width="10" height="10" rx="2" fill="#9be9a8"/><rect x="26" y="0" width="10" height="10" rx="2" fill="#ebedf0"/><rect x="39" y="0" width="10" height="10" rx="2" fill="#40c463"/><rect x="52" y="0" width="10" height="10" rx="2" fill="#ebedf0"/><rect x="65" y="0" width="10" height="10" rx="2" fill="#ebedf0"/><rect x="78" y="0" width="10" height="10" rx="2" fill="#9be9a8"/><rect x="91" y="0" width="10" height="10" rx="2" fill="#40c463"/><rect x="104" y="0" width="10" height="10" rx="2" fill="#30a14e"/><rect x="117" y="0" width="10" height="10" rx="2" fill="#ebedf0"/><rect x="130" y="0" width="10" height="10" rx="2" fill="#40c463"/><rect x="143" y="0" width="10" height="10" rx="2" fill="#40c463"/><rect x="156" y="0" width="10" height="10" rx="2" fill="#30a14e"/><rect x="169" y="0" width="10" height="10" rx="2" fill="#216e39"/><rect x="182" y="0" width="10" height="10" rx="2" fill="#40c463"/><rect x="195" y="0" width="10" height="10" rx="2" fill="#9be9a8"/><rect x="208" y="0" width="10" height="10" rx="2" fill="#40c463"/><rect x="221" y="0" width="10" height="10" rx="2" fill="#30a14e"/><rect x="234" y="0" width="10" height="10" rx="2" fill="#ebedf0"/><rect x="247" y="0" width="10" height="10" rx="2" fill="#9be9a8"/><rect x="260" y="0" width="10" height="10" rx="2" fill="#40c463"/><rect x="273" y="0" width="10" height="10" rx="2" fill="#30a14e"/><rect x="286" y="0" width="10" height="10" rx="2" fill="#216e39"/>
+          <rect x="0" y="13" width="10" height="10" rx="2" fill="#9be9a8"/><rect x="13" y="13" width="10" height="10" rx="2" fill="#ebedf0"/><rect x="26" y="13" width="10" height="10" rx="2" fill="#40c463"/><rect x="39" y="13" width="10" height="10" rx="2" fill="#9be9a8"/><rect x="52" y="13" width="10" height="10" rx="2" fill="#30a14e"/><rect x="65" y="13" width="10" height="10" rx="2" fill="#40c463"/><rect x="78" y="13" width="10" height="10" rx="2" fill="#ebedf0"/><rect x="91" y="13" width="10" height="10" rx="2" fill="#40c463"/><rect x="104" y="13" width="10" height="10" rx="2" fill="#ebedf0"/><rect x="117" y="13" width="10" height="10" rx="2" fill="#9be9a8"/><rect x="130" y="13" width="10" height="10" rx="2" fill="#30a14e"/><rect x="143" y="13" width="10" height="10" rx="2" fill="#ebedf0"/><rect x="156" y="13" width="10" height="10" rx="2" fill="#40c463"/><rect x="169" y="13" width="10" height="10" rx="2" fill="#9be9a8"/><rect x="182" y="13" width="10" height="10" rx="2" fill="#ebedf0"/><rect x="195" y="13" width="10" height="10" rx="2" fill="#40c463"/><rect x="208" y="13" width="10" height="10" rx="2" fill="#30a14e"/><rect x="221" y="13" width="10" height="10" rx="2" fill="#9be9a8"/><rect x="234" y="13" width="10" height="10" rx="2" fill="#40c463"/><rect x="247" y="13" width="10" height="10" rx="2" fill="#30a14e"/><rect x="260" y="13" width="10" height="10" rx="2" fill="#216e39"/><rect x="273" y="13" width="10" height="10" rx="2" fill="#40c463"/><rect x="286" y="13" width="10" height="10" rx="2" fill="#9be9a8"/>
+        </g>
+        <text x="10" y="55" font-family="Noto Serif SC" font-size="9" fill="#666">越绿 = 那天更新越多。每个方块 = 一次版本快照。</text>
+      </svg>
+    </div>
+    <p>对非技术人士来说,这可能是第一次有一个「可视化的产出记录」--而且别人也能看到。未来有人想了解你在做什么,这就是最好的名片。</p>
+  </div>
+</section>
+
+<!-- ===== PAGE 22: Skill 请专家帮你改稿 ===== -->
+<section class="page" data-page="22">
+  <div class="page-inner">
+    <div class="section-header">
+      <span class="mondrian-accent"></span>
+      <h1>Skill:请专家帮你改稿</h1>
+    </div>
+    <p>你的手册已经在线了。内容有了,排版有了,还能访问了。但--质量能不能再上一个台阶?</p>
+    <div class="content-card">
+      <p>想象一下这个场景:你写了一份产品说明,然后分别找了--</p>
+      <ul class="styled-list">
+        <li>一个专业编辑帮你改措辞</li>
+        <li>一个设计师帮你审排版</li>
+        <li>一个SEO专家帮你优化搜索</li>
+      </ul>
+      <p class="mt-2">现实里这要花多少钱、找多少人?</p>
+    </div>
+    <p><strong>Skill 就是"AI 的专家外挂"。</strong></p>
+    <p>有人把自己最擅长的事情--写作、排版、检查语法、优化结构--打磨成了一个"技能包",然后说:<em>"来,免费拿去用。"</em></p>
+    <p>这是开源世界最动人的事情之一。你不需要认识那个人,不需要付费,你的 AI 装上这个 Skill 之后,就像多了一个帮手的专业视角。</p>
+    <div class="metaphor-box">
+      如果 AI 是一个多面手助理,Skill 就是"请三个专家帮你改稿"。多面手初稿,专家润色。
+    </div>
+  </div>
+</section>
+
+<!-- ===== PAGE 23: 动手 安装第一个 Skill ===== -->
+<section class="page" data-page="23">
+  <div class="page-inner">
+    <div class="section-header green-accent">
+      <span class="mondrian-accent"></span>
+      <h1>动手:安装第一个 Skill</h1>
+    </div>
+    <p>不同的 AI agent 工具安装 Skill 的方式略有不同,但核心逻辑一样:找到→安装→使用。</p>
+    <div class="prompt-card">
+      <span class="prompt-label">PROMPT</span>
+      <button class="copy-btn">复制</button>
+      <code>我想给你安装一个 Skill 来提升写作质量。
+请帮我找一个适合"检查文档结构和措辞"的 Skill,
+并告诉我怎么安装和使用它。</code>
+    </div>
+    <p>或者,如果你已经知道想要什么:</p>
+    <div class="prompt-card">
+      <span class="prompt-label">PROMPT</span>
+      <button class="copy-btn">复制</button>
+      <code>请帮我搜索并安装一个前端设计相关的 Skill。
+安装后,用它来审视我当前的 HTML 页面,给出改进建议。</code>
+    </div>
+    <div class="result-hint">
+      AI 会搜索可用的 Skill 列表,找到合适的,安装后告诉你"已安装"。之后它在帮你做相关任务时,会自动调用这个 Skill 的能力。
+    </div>
+    <p class="text-muted">Skill 是累积的--装得越多,你的 AI 助手越"全面"。就像一个团队在不断扩招专家。</p>
+  </div>
+</section>
+
+<!-- ===== PAGE 24: 串联 完整工作流 (19a) ===== -->
+<section class="page" data-page="24">
+  <div class="page-inner">
+    <div class="section-header blue-accent">
+      <span class="mondrian-accent blue"></span>
+      <h1>串联:完整工作流</h1>
+    </div>
+    <p>现在让我们把四把钥匙串在一起,看完整的从想法到上线的路径:</p>
+    <div class="diagram-container">
+      <svg viewBox="0 0 560 280" xmlns="http://www.w3.org/2000/svg">
+        <!-- Step 1 -->
+        <rect x="20" y="20" width="240" height="50" rx="0" fill="#E53935" stroke="#1A1A1A" stroke-width="2"/>
+        <text x="140" y="50" text-anchor="middle" font-family="Oswald" font-size="14" fill="#fff">1. Markdown 列框架 → 审视结构</text>
+        <!-- Arrow -->
+        <path d="M140,70 L140,90" stroke="#1A1A1A" stroke-width="2" marker-end="url(#arrowM)"/>
+        <!-- Step 2 -->
+        <rect x="20" y="95" width="240" height="50" rx="0" fill="#E53935" stroke="#1A1A1A" stroke-width="2"/>
+        <text x="140" y="125" text-anchor="middle" font-family="Oswald" font-size="14" fill="#fff">2. 逐章填充内容 → 确认完整性</text>
+        <!-- Arrow -->
+        <path d="M140,145 L140,165" stroke="#1A1A1A" stroke-width="2" marker-end="url(#arrowM)"/>
+        <!-- Step 3 -->
+        <rect x="20" y="170" width="240" height="50" rx="0" fill="#1565C0" stroke="#1A1A1A" stroke-width="2"/>
+        <text x="140" y="200" text-anchor="middle" font-family="Oswald" font-size="14" fill="#fff">3. HTML+SVG 做呈现 → 视觉验收</text>
+        <!-- Arrow -->
+        <path d="M260,195 L290,195" stroke="#1A1A1A" stroke-width="2" marker-end="url(#arrowM)"/>
+        <!-- Step 4 -->
+        <rect x="300" y="170" width="240" height="50" rx="0" fill="#FDD835" stroke="#1A1A1A" stroke-width="2"/>
+        <text x="420" y="200" text-anchor="middle" font-family="Oswald" font-size="14" fill="#1A1A1A">4. GitHub 发布 → 拿到网址</text>
+        <!-- Arrow -->
+        <path d="M420,145 L420,165" stroke="#1A1A1A" stroke-width="2" marker-end="url(#arrowM)"/>
+        <!-- Step 5 -->
+        <rect x="300" y="95" width="240" height="50" rx="0" fill="#1A1A1A" stroke="#1A1A1A" stroke-width="2"/>
+        <text x="420" y="125" text-anchor="middle" font-family="Oswald" font-size="14" fill="#fff">5. Skill 提升质量 → 迭代优化</text>
+        <!-- Loop arrow -->
+        <path d="M420,95 C420,60 300,60 260,125" stroke="#E53935" stroke-width="2" fill="none" stroke-dasharray="5,3" marker-end="url(#arrowM)"/>
+        <text x="320" y="55" font-family="Noto Serif SC" font-size="10" fill="#E53935">循环迭代</text>
+      </svg>
+    </div>
+    <p>注意那条红色虚线--这是一个<strong>循环</strong>。Skill 给出的建议可能让你回去改 Markdown 结构,或者调整 HTML 呈现。每一轮循环,质量上一个台阶。</p>
+  </div>
+</section>
+
+<!-- ===== PAGE 25: 先发布,再迭代 (19b) ===== -->
+<section class="page" data-page="25">
+  <div class="page-inner">
+    <div class="section-header blue-accent">
+      <span class="mondrian-accent blue"></span>
+      <h1>先发布,再迭代</h1>
+    </div>
+    <p>记住:<em>先发布,再迭代</em>。不要追求一步到位。60分的东西先上线,比100分的东西永远在本地强。</p>
+    <div class="content-card">
+      <p>每一轮循环不需要很重。可能只是:</p>
+      <ul class="styled-list">
+        <li>修一个错别字</li>
+        <li>加一张示意图</li>
+        <li>调一下手机端的字号</li>
+      </ul>
+      <p>小步快跑,持续改进。</p>
+    </div>
+    <div class="diagram-container">
+      <svg viewBox="0 0 450 150" xmlns="http://www.w3.org/2000/svg">
+        <!-- Spiral path -->
+        <path d="M60,120 C60,60 120,40 160,60 C200,80 200,120 160,130 C130,138 110,110 130,90 C150,70 190,65 220,80" fill="none" stroke="#E53935" stroke-width="3" stroke-linecap="round"/>
+        <path d="M220,80 C250,95 260,120 240,130 C220,140 200,125 210,105 C220,85 260,75 300,85" fill="none" stroke="#1565C0" stroke-width="3" stroke-linecap="round"/>
+        <path d="M300,85 C340,95 350,115 335,125 C320,135 300,120 310,105 C320,90 360,80 400,90" fill="none" stroke="#FDD835" stroke-width="3" stroke-linecap="round" marker-end="url(#arrowM)"/>
+        <!-- Version labels -->
+        <text x="100" y="30" font-family="Oswald" font-size="16" fill="#E53935">v1</text>
+        <text x="230" y="55" font-family="Oswald" font-size="16" fill="#1565C0">v2</text>
+        <text x="370" y="65" font-family="Oswald" font-size="16" fill="#1A1A1A">v3</text>
+        <!-- Bottom label -->
+        <text x="225" y="145" text-anchor="middle" font-family="Noto Serif SC" font-size="11" fill="#666">每一轮螺旋,质量上一个台阶</text>
+      </svg>
+    </div>
+    <p>完美是好的敌人。先让它活着,再让它变好。</p>
+  </div>
+</section>
+
+<!-- ===== PAGE 26: 实战 从零到发布 ===== -->
+<section class="page" data-page="26">
+  <div class="page-inner">
+    <div class="section-header green-accent">
+      <span class="mondrian-accent blue"></span>
+      <h1>实战:从零到发布</h1>
+    </div>
+    <p>如果你从头开始,以下是一次完整的对话流:</p>
+    <div class="prompt-card">
+      <span class="prompt-label">PROMPT 1</span>
+      <button class="copy-btn">复制</button>
+      <code>我要做一份"[主题]"的在线手册。
+请先用 Markdown 帮我列出整体框架(章节 + 每章要点)。
+不要写具体内容,只要骨架让我审视。</code>
+    </div>
+    <p class="text-muted">→ 审视结构,提出修改意见。可能来回2-3轮。</p>
+    <div class="prompt-card">
+      <span class="prompt-label">PROMPT 2</span>
+      <button class="copy-btn">复制</button>
+      <code>框架确认。请逐章展开内容,先写第一章。
+保持 Markdown 格式,每章写完我确认后再写下一章。</code>
+    </div>
+    <p class="text-muted">→ 逐章确认,保持掌控。</p>
+    <div class="prompt-card">
+      <span class="prompt-label">PROMPT 3</span>
+      <button class="copy-btn">复制</button>
+      <code>所有内容确认完毕。现在请把它转成一个完整的 HTML 网站。
+要求:
+- 翻页式或长滚动式均可(你判断哪个更适合)
+- 配上 SVG 示意图
+- 适合手机阅读
+- 输出文件结构:index.html + css/style.css + js/app.js</code>
+    </div>
+    <p class="text-muted">→ 验收视觉效果,提修改意见。</p>
+    <div class="prompt-card">
+      <span class="prompt-label">PROMPT 4</span>
+      <button class="copy-btn">复制</button>
+      <code>页面完成。请帮我把这些文件上传到我的 GitHub 仓库 [仓库名],
+并开启 GitHub Pages,让我拿到在线访问地址。</code>
+    </div>
+    <div class="result-hint">
+      完成!你现在拥有一个在线手册的网址,可以分享给任何人。整个过程你没写一行代码--你做的是"决策"和"验收"。
+    </div>
+  </div>
+</section>
+
+<!-- ===== PAGE 27: 下一步去哪 ===== -->
+<section class="page" data-page="27">
+  <div class="page-inner">
+    <div class="section-header blue-accent">
+      <span class="mondrian-accent blue"></span>
+      <h1>下一步去哪</h1>
+    </div>
+    <p>手册做出来了,接下来你可能会想:</p>
+    <div class="content-card">
+      <h3>深化内容</h3>
+      <p>隔一段时间回来加一章、改个措辞。GitHub 会记录每一次更新。你的手册是活的,不是一次交差的。</p>
+    </div>
+    <div class="content-card blue-corner">
+      <h3>做第二个项目</h3>
+      <p>同一套方法可以做任何东西:团队SOP、课程笔记、产品文档、个人博客。每个新仓库就是一个新项目。</p>
+    </div>
+    <div class="content-card red-corner">
+      <h3>去"建材市场"逛逛</h3>
+      <p>在 GitHub 上搜你感兴趣的关键词。看看别人怎么做的。找到喜欢的?Fork 一份(就是复制到你自己那里),然后让 AI 帮你改成自己的。</p>
+    </div>
+    <div class="content-card no-corner">
+      <h3>给别人看你做的</h3>
+      <p>把网址分享出去。收集反馈。"哪里看不懂?""哪里想了解更多?"--然后迭代。这就是"用作品说话"。</p>
+    </div>
+    <p class="text-muted mt-2">你已经有了工具链和方法论。剩下的只是"做"。</p>
+  </div>
+</section>
+
+<!-- ===== PAGE 28: 尾声 闭环 ===== -->
+<section class="page final-page" data-page="28">
+  <div class="page-inner">
+    <div class="mondrian-accent" style="margin: 0 auto 16px; width: 60px;"></div>
+    <h1>闭环</h1>
+    <p style="max-width: 560px; margin: 0 auto;">还记得第一页说的吗?</p>
+    <div class="content-card" style="max-width: 560px; margin: 20px auto;">
+      <p>"你正在看的这个页面--翻页式、有配图、手机上也能看--就是用这套方法做出来的。"</p>
+    </div>
+    <p style="max-width: 560px; margin: 0 auto;">现在你走完了整条路,回头看看这个教程本身:</p>
+    <ul class="styled-list" style="max-width: 460px; margin: 16px auto; text-align: left;">
+      <li>内容结构?Markdown 先列框架,逐章审视</li>
+      <li>视觉呈现?HTML + CSS + SVG,一行代码没手写</li>
+      <li>在线访问?GitHub Pages,免费发布</li>
+      <li>质量保障?Skill 加持,迭代打磨</li>
+    </ul>
+    <p style="max-width: 560px; margin: 20px auto 0;">这个教程本身就是方法的产物。如果它看起来还不错--那这套方法就是有效的。</p>
+    <p style="max-width: 560px; margin: 16px auto;"><em>现在轮到你了。</em></p>
+    <div class="diagram-container" style="max-width: 300px; margin: 24px auto 0; border: none; padding: 0;">
+      <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <rect x="10" y="10" width="80" height="80" fill="#E53935" stroke="#1A1A1A" stroke-width="3"/>
+        <rect x="95" y="10" width="95" height="80" fill="#FAFAFA" stroke="#1A1A1A" stroke-width="3"/>
+        <rect x="10" y="95" width="80" height="95" fill="#FAFAFA" stroke="#1A1A1A" stroke-width="3"/>
+        <rect x="95" y="95" width="55" height="95" fill="#1565C0" stroke="#1A1A1A" stroke-width="3"/>
+        <rect x="155" y="95" width="35" height="55" fill="#FDD835" stroke="#1A1A1A" stroke-width="3"/>
+        <rect x="155" y="155" width="35" height="35" fill="#1A1A1A" stroke="#1A1A1A" stroke-width="3"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+</div><!-- .pages-container -->
+
+<script src="js/app.js"></script>
 </body>
 </html>
